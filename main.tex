@@ -1,0 +1,24 @@
+Setting
+# 
+# We consider the following setting. Let $S_n = \{Z_1,\ldots,Z_n\}$ where $Z_i=(x_i,y_i) \in \mathcal{X}
+# \times \mathcal{Y}$ is a pair of feature-label.
+# 
+# We are interested in the linear regression problem. We assume that there exists a parameter space $\Theta$ and an underlying parameter $\theta^* \in \Theta$ such that $y_i = \langle x_i,\theta^*\rangle+\epsilon_i.$ 
+# 
+# We consider the squared loss defined as $\ell(\theta,x,y) = \frac{1}{2}(y-\langle x,\theta\rangle)^2.$ To simplify notation we will denote $\ell_i(\theta) = \ell(\theta,x_i,y_i).$
+# The learning problem consists in having a good estimate of $\theta^*.$ This problem is among the most famous learning problem and therefore enjoys a lot of knowns results. Especially if we define the Empirical Risk Minimizer (ERM) as:
+# $$\widehat \theta_n := \arg \min_{\theta \in \Theta} \frac{1} {n}\mathcal{L}_n(\theta) = \arg \min_{\theta \in \Theta} ||x_{1:n}\theta - y_{1:n}||_2^2$$
+# where $\mathcal{L}_n(\theta)=\sum_{t=1}^n \ell_t(\theta)$.
+# We know that $\widehat\theta_n = (x_{1:n}^Tx_{1:n})^{-1}x_{1:n}^T y_{1:n}$ where for all $t$, $x_{1:t}$ is the matrix whose rows are $x_1^T,...,x_t^T$ and $y_{1:t}=(y_1,...,y_t)^T.$
+# 
+# #### Assumption:
+# There exists a non-increasing sequence $(\phi_d)_{d \in \mathbb{N}^*}$ of non-negative real numbers such that, for all $t \in \mathbb{N}^*$:
+#     $$\mathbb{E}\left[\mathbb{E}_{\epsilon' \sim \mu}[\epsilon']-\epsilon_t \Big| \mathcal{F}_{t-d}\right] \leq \phi_d\,,$$
+#     where $\epsilon'$ being independent on the process $(\epsilon_t)_{t\in\mathbb N^*}$ and having as distribution the stationary marginal $\mu$.   
+# 
+# To simplify the analysis let $n=dK$ and define for all $i\in [d]$
+# $$\widehat \theta_K^{(i)} = \arg \min_{\theta} || x_{1:K}^{(i)}\theta - y_{1:K}^{(i)}||_2^2$$
+# where $x_{1:K}^{(i)}$ is the matrix whose rows are $x_i^T,x_{i+d}^T,\ldots,x_{i+(K-1)d}^T$ and $y_{1:t}=(y_i,y_{i+d},\ldots,y_{i+(K-1)d})^T$
+# 
+# We consider the following estimator
+# $$\tilde \theta_n = \frac{1}{d}\sum_{i=1}^d\widehat \theta_K^{(i)}$$
